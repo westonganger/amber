@@ -57,7 +57,7 @@ sudo make install
 ```
 
 If you're using ArchLinux or similar distro try:
-
+asd
 ```
 yaourt -S amber
 ```
