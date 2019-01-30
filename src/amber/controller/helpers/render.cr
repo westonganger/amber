@@ -24,7 +24,13 @@ module Amber::Controller::Helpers
       # Render Layout
       {% if layout && !partial %}
         content = %content
-        render_template("layouts/#{{{layout.class_name == "StringLiteral" ? layout : LAYOUT}}}", {{path}})
+        {% if layout.class_name == "StringLiteral" %}
+          render_template("layouts/#{{{layout}}}", {{path}})
+        {% elsif LAYOUT.class_name == "Proc" %}
+          render_template("layouts/#{{{layout.call}}}", {{path}})
+        {% else %}
+          render_template("layouts/#{{{LAYOUT}}}", {{path}})
+        {% end %}
       {% else %}
         %content
       {% end %}
